@@ -1,26 +1,28 @@
 package hu.nive.ujratervezes.oopcollection.army;
 
-public class HeavyCavalry extends MilitaryUnit {
-
-    public boolean isCharged = false;
+public class HeavyCavalry extends MilitaryUnit{
+    private boolean isCharged = true;
 
     public HeavyCavalry() {
-        this.damage = 20;
-        this.hitPoints = 150;
-        this.shield = true;
-    }
+        hitPoints = 150;
+        damage = 20;
+        isArmored = true;
 
+    }
     @Override
-    public int doDamage() {
-        if (this.isCharged = false) {
-            return this.damage * 3;
+    int doDamage() {
+        if (isCharged) {
+            isCharged = false;
+            return damage * 3;
         }
-        return this.damage;
+        else return damage;
     }
+
 
     @Override
-    public int sufferDamage(int damage) {
-        return this.hitPoints -= (damage / 2);
+    void sufferDamage(int damage) {
+        if (isArmored) {
+            hitPoints = hitPoints - (damage / 2);
+        } else hitPoints = hitPoints - damage;
     }
-
 }
